@@ -25,7 +25,6 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var webView: WebView
 
-    // ---- Leer la pizarra: foto (cámara o galería) -> texto con ML Kit, sin conexión ----
     private var photoUri: Uri? = null
 
     private val takePhoto = registerForActivityResult(ActivityResultContracts.TakePicture()) { ok ->
@@ -37,7 +36,6 @@ class MainActivity : ComponentActivity() {
         if (uri != null) recognize(uri) else sendBoardText(null, "cancel")
     }
 
-    /** Puente con la web: window.Android.scanBoard("camera" | "gallery"). */
     inner class Bridge {
         @JavascriptInterface
         fun scanBoard(source: String) {
@@ -83,7 +81,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Mantener la pantalla encendida mientras entrenas.
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         val assetLoader = WebViewAssetLoader.Builder()
@@ -109,7 +106,6 @@ class MainActivity : ComponentActivity() {
             webView.loadUrl("https://appassets.androidplatform.net/assets/www/index.html")
         }
 
-        // Botón atrás: primero vuelve dentro de la app (sesión -> inicio); si ya estás en inicio, sale.
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 webView.evaluateJavascript("window.appBack ? window.appBack() : false") { result ->

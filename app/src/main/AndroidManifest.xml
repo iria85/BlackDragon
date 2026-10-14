@@ -17,7 +17,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Para guardar la foto de la pizarra que hace la cámara -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

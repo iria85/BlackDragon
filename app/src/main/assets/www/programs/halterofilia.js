@@ -1,9 +1,7 @@
-// Programación de HALTEROFILIA · 42 sesiones (extraída de halterofilia_tracker.xlsx)
-// Formato de "pct": "%/series x reps" separados por comas. "60%/3x3" = 3 series de 3 al 60 %.
 window.PROGRAMS = window.PROGRAMS || {};
 window.PROGRAMS.halterofilia = {
   name: "Halterofilia",
-  defaults: { start: "2026-10-01", weekdays: [4] },   // jueves
+  defaults: { start: "2026-10-01", weekdays: [4] },
   days: [
  {
   "n": 1,
