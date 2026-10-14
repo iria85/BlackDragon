@@ -1,0 +1,9 @@
+<resources>
+    <color name="bg">#101318</color>
+    <color name="icon_bg">#000000</color>
+    <style name="Theme.Entrenos" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/bg</item>
+        <item name="android:navigationBarColor">@color/bg</item>
+    </style>
+</resources>
