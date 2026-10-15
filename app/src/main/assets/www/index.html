@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Black Dragon</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Black Dragon">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#eef0f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101318" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <style>
 :root{
   --bg:#eef0f2; --surface:#ffffff; --ink:#15191f; --muted:#5d6672; --line:#d5dae0;
@@ -1141,6 +1150,19 @@ window.appBack = () => {
 };
 
 render();
+
+if (!window.Android){
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+  if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+  let wakeLock = null;
+  const keepAwake = () => {
+    if (!("wakeLock" in navigator) || document.visibilityState !== "visible" || (wakeLock && !wakeLock.released)) return;
+    navigator.wakeLock.request("screen").then(l => { wakeLock = l; }).catch(() => {});
+  };
+  document.addEventListener("visibilitychange", keepAwake);
+  document.addEventListener("click", keepAwake);
+  keepAwake();
+}
 </script>
 </body>
 </html>
